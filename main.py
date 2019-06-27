@@ -1,5 +1,6 @@
 import re
 from io import BytesIO
+from typing import List, Dict
 import colored
 import requests
 from requests import Response
@@ -52,9 +53,13 @@ def retrieve_fontmap(fontcss_url: str) -> FontGlyphIdMap:
         resp: Response = requests.get(fontfile_url)
         font = TTFont(BytesIO(resp.content))
         font.saveXML(fontxml)
-        glyph_names = font.getGlyphNames()
+        glyphs: List[str] = font.getGlyphOrder()
+        glyphs_map: Dict[str, str] = {
+            str(idx).zfill(2): glyphs[idx]
+            for idx in range(len(glyphs))
+        }
         charmap = font.getBestCmap()
-        fontmap = FontGlyphIdMap(glyph_names, charmap)
+        fontmap = FontGlyphIdMap(glyphs_map, charmap)
         # print(yellow + f"Font mapping code: {fontmap}" + reset)
         return fontmap
     raise Exception("The font css URL of scraping protection not found.")
@@ -64,24 +69,26 @@ def decode_text(raw_text: str, fontmap: FontGlyphIdMap) -> str:
     unitext: str = display_unicode(raw_text)
     print(f"Unicode text = {unitext}, original = {raw_text}")
 
+    content: str = ""
     escape_text = raw_text.encode('unicode-escape').decode('utf-8')
-    for unichar in escape_text.split("\\u"):
+    unichars = escape_text.split("\\u")
+    print(f"The unichar = {unichars}")
+    for unichar in unichars:
         if unichar:
-            content: str = ""
             decimal_code = int(unichar, 16)
             charmap = fontmap.charmap
             glyph_ids = fontmap.glyphs_ids
-            charcodes = charmap.keys()
-            if decimal_code is charcodes:
+            if decimal_code in charmap.keys():
                 maincode = charmap[decimal_code]
                 for glyph_id, code in glyph_ids.items():
                     if maincode is code:
                         content += Config.FONT_GLYPHID_MAPPER[glyph_id]
-            print(f"decode content => {content}")
+    content = content.replace(" ", "")
+    print(f"decode content => {content}")
     return content
 
 
-def scraping_apply_contact(html: bytes):
+def scraping_apply_contact(html: bytes) -> ApplyContactInfo:
     tree = etree.HTML(html)
     contactor = str(tree.xpath(Config.CONTACTTOR_XPATH)[0])
 
@@ -95,11 +102,17 @@ def scraping_apply_contact(html: bytes):
     email = decode_text(raw_email, fontmap)
     telphone = decode_text(raw_telphone, fontmap)
     mobile = decode_text(raw_mobile, fontmap)
+    return ApplyContactInfo(contactor, email, telphone, mobile)
 
 
 def scraping():
     resp: Response = requests.get(Config.SITE_URL)
-    scraping_apply_contact(resp.content)
+    contact_data = scraping_apply_contact(resp.content)
+    print("Finish scraping and decode encrption text ！")
+    print(f"> 應徵人: {contact_data.contactor}")
+    print(f"> 電子郵件: {contact_data.email}")
+    print(f"> 市話: {contact_data.telphone}")
+    print(f"> 手機: {contact_data.mobile}")
 
 
 if __name__ == "__main__":
