@@ -1,17 +1,17 @@
 from typing import Dict
 
 
-class ApplyContactInfo(object):
-    def __init__(self, contactor: str, email: str, telphone: str, mobile: str) -> None:
-        self.contactor = contactor
+class ApplyContactPerson(object):
+    def __init__(self, contact_name: str, email: str, telphone: str, mobile: str) -> None:
+        self.contact_name = contact_name
         self.email = email
         self.telphone = telphone
         self.mobile = mobile
 
 
 def __repr__(self) -> str:
-    return f"<ApplyContactInfo: \n\
-        contactor = {self.contactor} \n\
+    return f"<ApplyContactPerson: \n\
+        contact_name = {self.contact_name} \n\
         email = {self.email} \n\
         telphone = {self.telphone} \n\
         mobile={self.mobile} >"

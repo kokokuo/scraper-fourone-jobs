@@ -5,20 +5,20 @@ class Config(object):
     SITE_URL = "https://www.1111.com.tw/job/85992852/?agent=sticktop_51563220_85992852"
 
     """
-    FONT_RES_HREF_XPATH: Font 所在的 XPATH 標籤 Href
-    FONT_HREF_PREFIX: Font CSS 檔案的前綴，確認格式用
-    FONTCSS_REPLACEMENT_PATTERN: 取代的 Pattern，為了讓路徑直接切換成 Font 的檔案來源並解析，因為檔案路徑與名稱一致，只需取代副檔名
-    FONT_WOFF_EXTENSION: 要取代的副檔名
+    FONT_CSS_HREF_XPATH: Font 所在的 XPATH 標籤 Href
+    FONT_CSS_HREF_PATH_PREFIX: Font CSS 檔案的路徑前綴，確認格式用
+    FONT_CSS_REPLACEMENT_PATTERN: 取代的 Pattern，為了讓路徑直接切換成 Font 的檔案來源並解析，因為檔案路徑與名稱一致，只需取代副檔名
+    FONT_RES_FILE_WOFF_EXTENSION: 字型資源檔的格式副檔名，也是要取代 FONT_CSS_REPLACEMENT_PATTERN 的詞
     """
-    FONT_RES_HREF_XPATH = "/html/head/link[1]/@href"
-    FONT_HREF_PREFIX = "https://www.1111.com.tw/webService/NET40/Runes/fonts/Books"
-    FONTCSS_REPLACEMENT_PATTERN = r".css$"
-    FONT_WOFF_EXTENSION = ".woff?v0001"
+    FONT_CSS_HREF_XPATH = "/html/head/link[1]/@href"
+    FONT_CSS_HREF_PATH_PREFIX = "https://www.1111.com.tw/webService/NET40/Runes/fonts/Books"
+    FONT_CSS_REPLACEMENT_PATTERN = r".css$"
+    FONT_RES_FILE_WOFF_EXTENSION = ".woff?v0001"
 
     """
     要爬取解析的 XPATH
     """
-    CONTACTTOR_XPATH = "//*[@id='Apply']/div/ul/li[1]/div[2]/text()"
+    CONTACT_PERSON_XPATH = "//*[@id='Apply']/div/ul/li[1]/div[2]/text()"
     EMAIL_XPATH = "//*[@id='Apply']/div/ul/li[2]/div[2]/text()"
     TELPHONE_XPATH = "//*[@id='Apply']/div/ul/li[3]/div[2]/text()"
     MOBILE_PHONE_XPATH = "//*[@id='Apply']/div/ul/li[4]/div[2]/text()"
