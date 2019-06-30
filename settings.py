@@ -23,7 +23,7 @@ class Config(object):
     TELPHONE_XPATH = "//*[@id='Apply']/div/ul/li[3]/div[2]/text()"
     MOBILE_PHONE_XPATH = "//*[@id='Apply']/div/ul/li[4]/div[2]/text()"
 
-    FONT_GLYPHID_MAPPER: Dict[str, str] = {
+    FONT_GLYPHID_TRANSLATOR: Dict[str, str] = {
         "00": " ",
         "01": " ",
         "02": "#",
