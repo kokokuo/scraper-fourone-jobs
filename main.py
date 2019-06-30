@@ -1,13 +1,9 @@
-import re
-from io import BytesIO
-from typing import List, Dict
-import colored
 import requests
 from requests import Response
-from lxml import etree
-from fontTools.ttLib import TTFont
-from dto import ApplyContactInfo, FontGlyphIdMap
+from scraping.dto import ApplyContactPerson, WOFFContent
+from scraping.parser import ContactPesonParsingService
 from settings import Config
+
 """
 2019.06.26, 因 Python Taiwan 有網友發問如何解析 1111 人力銀行的應徵資料，所以來研究如何找尋
 資料來源： https://www.1111.com.tw/job/85992852/?agent=sticktop_51563220_85992852
@@ -22,98 +18,20 @@ from settings import Config
 """
 
 
-def display_unicode(data):
-    # 對照此網頁一致：http://www.convertstring.com/zh_TW/EncodeDecode/HexEncode
-    # 測試範例：
-    return "".join(["\\u%s" % hex(ord(l))[2:].zfill(4) for l in data])
-
-
-def named_xml_file(fontcss_url: str) -> str:
-    pattern = r"[a-zA-Z0-9]+\.css$"
-    xml_extension = ".xml"
-    matched = re.search(pattern, fontcss_url)
-    if matched:
-        extension_pattern = ".css$"
-        raw_font: str = matched.group()
-        fontxml = re.sub(extension_pattern, xml_extension, raw_font)
-        return fontxml
-    raise Exception("Font File Name not found.")
-
-
-def retrieve_fontmap(fontcss_url: str) -> FontGlyphIdMap:
-    green = colored.fg("green")
-    yellow = colored.fg("yellow")
-    reset = colored.attr("reset")
-    print(green + f"Scraping protection font css url: {fontcss_url}" + reset)
-    # 調整文字樣式連結，指向 Font 檔案
-    if Config.FONT_HREF_PREFIX in fontcss_url:
-        fontfile_url: str = re.sub(Config.FONTCSS_REPLACEMENT_PATTERN, Config.FONT_WOFF_EXTENSION, fontcss_url)
-        fontxml = named_xml_file(fontcss_url)
-        print(green + f"Scraping protection font file url : {fontfile_url}\n" + reset)
-        resp: Response = requests.get(fontfile_url)
-        font = TTFont(BytesIO(resp.content))
-        font.saveXML(fontxml)
-        glyphs: List[str] = font.getGlyphOrder()
-        glyphs_map: Dict[str, str] = {
-            str(idx).zfill(2): glyphs[idx]
-            for idx in range(len(glyphs))
-        }
-        charmap = font.getBestCmap()
-        fontmap = FontGlyphIdMap(glyphs_map, charmap)
-        # print(yellow + f"Font mapping code: {fontmap}" + reset)
-        return fontmap
-    raise Exception("The font css URL of scraping protection not found.")
-
-
-def decode_text(raw_text: str, fontmap: FontGlyphIdMap) -> str:
-    unitext: str = display_unicode(raw_text)
-    print(f"Unicode text = {unitext}, original = {raw_text}")
-
-    content: str = ""
-    escape_text = raw_text.encode('unicode-escape').decode('utf-8')
-    unichars = escape_text.split("\\u")
-    print(f"The unichar = {unichars}")
-    for unichar in unichars:
-        if unichar:
-            decimal_code = int(unichar, 16)
-            charmap = fontmap.charmap
-            glyph_ids = fontmap.glyphs_ids
-            if decimal_code in charmap.keys():
-                maincode = charmap[decimal_code]
-                for glyph_id, code in glyph_ids.items():
-                    if maincode is code:
-                        content += Config.FONT_GLYPHID_MAPPER[glyph_id]
-    content = content.replace(" ", "")
-    print(f"decode content => {content}")
-    return content
-
-
-def scraping_apply_contact(html: bytes) -> ApplyContactInfo:
-    tree = etree.HTML(html)
-    contactor = str(tree.xpath(Config.CONTACTTOR_XPATH)[0])
-
-    # 以下為帶有 txticon 樣式，加密過的內容
-    raw_email = str(tree.xpath(Config.EMAIL_XPATH)[0])
-    raw_telphone = str(tree.xpath(Config.TELPHONE_XPATH)[0])
-    raw_mobile = str(tree.xpath(Config.MOBILE_PHONE_XPATH)[0])
-
-    raw_fontcss_url = tree.xpath(Config.FONT_RES_HREF_XPATH)[0]
-    fontmap: FontGlyphIdMap = retrieve_fontmap(raw_fontcss_url)
-    email = decode_text(raw_email, fontmap)
-    telphone = decode_text(raw_telphone, fontmap)
-    mobile = decode_text(raw_mobile, fontmap)
-    return ApplyContactInfo(contactor, email, telphone, mobile)
-
-
-def scraping():
-    resp: Response = requests.get(Config.SITE_URL)
-    contact_data = scraping_apply_contact(resp.content)
+def output(result: ApplyContactPerson) -> None:
     print("Finish scraping and decode encrption text ！")
-    print(f"> 應徵人: {contact_data.contactor}")
-    print(f"> 電子郵件: {contact_data.email}")
-    print(f"> 市話: {contact_data.telphone}")
-    print(f"> 手機: {contact_data.mobile}")
+    print(f"> 聯繫人: {result.contact_name}")
+    print(f"> 電子郵件: {result.email}")
+    print(f"> 市話: {result.telphone}")
+    print(f"> 手機: {result.mobile}")
+
+
+def start_scraping():
+    resp: Response = requests.get(Config.SITE_URL)
+    parsing_service = ContactPesonParsingService()
+    result: ApplyContactPerson = parsing_service.parse(resp.content)
+    output(result)
 
 
 if __name__ == "__main__":
-    scraping()
+    start_scraping()
