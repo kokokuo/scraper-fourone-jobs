@@ -23,6 +23,9 @@ class Config(object):
     TELPHONE_XPATH = "//*[@id='Apply']/div/ul/li[3]/div[2]/text()"
     MOBILE_PHONE_XPATH = "//*[@id='Apply']/div/ul/li[4]/div[2]/text()"
 
+    """
+    字型的文字翻譯與編號檔，須先手動整理
+    """
     FONT_GLYPHID_TRANSLATOR: Dict[str, str] = {
         "00": " ",
         "01": " ",
