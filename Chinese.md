@@ -42,7 +42,7 @@
 
 首先打開副檔名為 `.css` 檔案，就會直接看到定義 `runes` 字型的 `font-face` 屬性，這是在 CSS3 提供的[新屬性](https://developer.mozilla.org/zh-TW/docs/Web/CSS/@font-face)，用來協助開發端可以提供字型給用戶呈現，而這個 `font-face` 也常常被拿來作為 CSS 字型編碼反爬蟲的方式。
 
-**<p align="center">txticon 的 CSS 定義</p>**
+**<p align="center">自定義的 font-family 字型字體 runes 所在位置</p>**
 <p align="center">
   <img src="../master/Images/Anti-scraping-font-face-custom-font-url.png?raw=true" width="640px">
 </p>
