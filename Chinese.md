@@ -117,14 +117,23 @@ font.saveXML("保存的路徑")
 
 #### (1.) GlyphOrder 與 GlyphID 標籤
 
-**GlyphOrder** 與 **GlyphID** 標籤，會有序的紀錄該字型檔中，每個 **GlyphID** 標籤會紀錄該字型文字的**索引 (Index)** 以及各自代表的 **Unicode** 編碼，這也可以對照到前面透過  **FontDrop!** 所紀錄的 **Index**，所以我們便可以透過該 **Index** 得知彼此在 **FontDrop!** 上所呈現的字型文字是什麼。
+**GlyphOrder** 與 **GlyphID** 標籤：會有序的紀錄該字型檔中，每個 **GlyphID** 標籤會紀錄該字型文字的**索引 (Index)** 以及各自代表的 **Unicode** 編碼，這也可以對照到前面透過  **FontDrop!** 所紀錄的 **Index**，所以我們便可以透過該 **Index** 得知彼此在 **FontDrop!** 上所呈現的字型文字是什麼。
 
 **<p align="center">字型 XML 格式 - GlyphOrder 與 GlyphID 標籤</p>**
 <p align="center">
   <img src="../master/Images/Anti-scraping-font-glyph-ids.png?raw=true" width="640px">
 </p>
 
+#### (2.) TTGlyph 與 contour 標籤
 
+**TTGlyph** 與 **contour** 標籤： **TTGlyph** 會紀錄 **GlyphID** 中文字代表的 Unicode 編碼在字型檔中的字型資訊，包含該字型的最大寬高，以及由標籤 **contour** 所組成的輪廓與描繪座標，因為字型檔中的字型是透過輪廓描述並識別的，不會有任何標籤告知該字型是什麼數值。
+
+這部分的數值，也可以對應到 **FontDrop!** 中所呈現的輪廓座標與最小最大 X, Y 寬高。
+
+**<p align="center">字型 XML 格式 - TTGlyph 與 contour 標籤</p>**
+<p align="center">
+  <img src="../master/Images/Anit-scraping-glyph-contours.png?raw=true" width="640px">
+</p>
 
 
 
