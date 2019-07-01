@@ -56,13 +56,17 @@
 
 當你下載了字型檔案後，我們要開始解析字型的格式，但是要如何解析呢？ 這邊可以推薦如果你是 Windows 系統，可以去安裝 **FontCreator** 這套軟體，並且透過這套軟體以視覺化的形式查看裡面的字型，與每個字型會有對應的 16 進制 Unicode 編碼，例如下圖：
 
+**<p align="center">FontCreator 字型檢視範例</p>**
+<p align="center">
+  <img src="../master/Images/Font-Creator-Sample.png?raw=true" width="640px">
+</p>
 
-在上途中你會看到字型 `` 對應到 Unicode 的 `` ，其中 Unicode 的前綴字 `uni` 可以省略他主要是前面的即可。
+在上途中你會看到字型 `左` 對應到 Unicode 的 `uniED8C` ，其中 Unicode 的前綴字 `uni` 可以省略他主要是前面的即可。
 
 
 ## 參考文章
 1. [爬蟲之字型反爬（一）起點網](https://www.itread01.com/content/1544058306.html)
-2. [Python：爬蟲例項2：爬取貓眼電影——破解字型反爬](https://www.itread01.com/content/1542776590.html)
+2. [Python：爬蟲例項 2：爬取貓眼電影——破解字型反爬](https://www.itread01.com/content/1542776590.html)
 3. [爬蟲之字型反爬（三）汽車之家](https://www.itread01.com/content/1547172845.html)
-4. [Python爬蟲六：字型反爬處理（貓眼+汽車之家）-2018.10](https://www.itread01.com/content/1544669846.html)
+4. [Python 爬蟲六：字型反爬處理（貓眼+汽車之家）-2018.10](https://www.itread01.com/content/1544669846.html)
 
