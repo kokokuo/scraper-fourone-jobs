@@ -61,7 +61,18 @@
   <img src="../master/Images/Font-Creator-Sample.png?raw=true" width="640px">
 </p>
 
-在上途中你會看到字型 `左` 對應到 Unicode 的 `uniED8C` ，其中 Unicode 的前綴字 `uni` 可以省略他主要是前面的即可。
+在上圖的範例並非該「數字求職網」，而是其他反爬蟲解說的[例子截圖中](https://www.itread01.com/content/1547172845.html)，你會看到字型 `左` 對應到 Unicode 的 `uniED8C` ，其中 Unicode 的前綴字 `uni` 可以省略他主要是前面的即可。
+
+不過在 MacOSX 上並不能使用 **FontCreator** 這套軟體，此時可以建議使用 **[FontDrop!](https://fontdrop.info/)**，這個字型檢視服務有著完整的檢視功能，只需要把字型檔匯入即可，如下圖，我們上傳剛剛從「數字求職網」下載的字型檔：
+
+在上圖你會看到不同的字型，且每個字型皆有會顯示該 Unicode 編碼。接著當你點進去字型後，你會看見更多內容，首先是 Unicode 的編碼變多？ 為什麼？ 這代表著其實每個字型並非只有一個代表的 Unicode 對應碼，很多不同的編碼皆適用，只是都會有一個代碼碼，而代表碼會是第一個，例如這邊的例子 `(` 會是 `E12D`。
+
+另外一個比較重要的訊息是 **Contours data** 表示的是該字型的輪廓，然後 **Inedx** 表示的是這個字型在字型表中的順序。
+
+
+
+
+
 
 
 ## 參考文章
