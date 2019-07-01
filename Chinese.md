@@ -115,27 +115,47 @@ font.saveXML("保存的路徑")
 
 因此雖然我們在前半段透過了 **FontCreator** 或 **FontDrop!** 讀取字型檔案並看見可視化的內容，但仍然需要了解字體內部的規範與定義，在使用 `fonttools` 提供的方法時，才能知道要呼叫的方法會對應什麼標籤、什麼資料值。所以當存成 XML 後便可以直接閱讀。
 
-#### (1.) GlyphOrder 與 GlyphID 標籤
+那麼接著我們來打開保存的 XML 格式字型檔來認識認識。
 
-**GlyphOrder** 與 **GlyphID** 標籤：會有序的紀錄該字型檔中，每個 **GlyphID** 標籤會紀錄該字型文字的**索引 (Index)** 以及各自代表的 **Unicode** 編碼，這也可以對照到前面透過  **FontDrop!** 所紀錄的 **Index**，所以我們便可以透過該 **Index** 得知彼此在 **FontDrop!** 上所呈現的字型文字是什麼。
+#### (1.) GlyphOrder 與 GlyphID 標籤 - 字型的索引編號與代表的 Unicode 編碼
+
+**GlyphOrder** 與 **GlyphID** 標籤：會有序的紀錄該字型檔的所有字型。每個 **GlyphID** 標籤藉由 **索引 (Index)** 以及各自代表的 **Unicode** 編碼來代表字型。這也可以對照到前面的 **FontDrop!** 中的 **Index** 資訊，因此便可以透過該 **Index** 得知彼此在 **FontDrop!** 上所呈現的字型是什麼文字。
+
+例如下圖中，我們看一下索引為 `4` 的 Unicode 編碼為 `uniE12D`，而對照一開始的 **FontDrop!** 會是 `(` 。
 
 **<p align="center">字型 XML 格式 - GlyphOrder 與 GlyphID 標籤</p>**
 <p align="center">
   <img src="../master/Images/Anti-scraping-font-glyph-ids.png?raw=true" width="640px">
 </p>
 
-#### (2.) TTGlyph 與 contour 標籤
+#### (2.) TTGlyph 與 contour 標籤 - 字型的輪廓與描述輪廓的座標
 
-**TTGlyph** 與 **contour** 標籤： **TTGlyph** 會紀錄 **GlyphID** 中文字代表的 Unicode 編碼在字型檔中的字型資訊，包含該字型的最大寬高，以及由標籤 **contour** 所組成的輪廓與描繪座標，因為字型檔中的字型是透過輪廓描述並識別的，不會有任何標籤告知該字型是什麼數值。
+**TTGlyph** 與 **contour** 標籤： **TTGlyph** 會紀錄 **GlyphID** 文字代表的 Unicode 編碼在字型檔中的「輪廓資訊」，包含該字型的最小最大 X, Y 寬高，以及由標籤 **contour** 所組成的「輪廓描繪座標」。
 
-這部分的數值，也可以對應到 **FontDrop!** 中所呈現的輪廓座標與最小最大 X, Y 寬高。
+因為字型檔中的字型是透過輪廓描述並識別的，因此不會有任何標籤告知該字型是什麼「字」，而是只會紀錄該字的「輪廓」，只是我們透過軟體看得出是什麼文字而已。另外這些輪廓做標可以在 **FontDrop!** 中也能找到一樣的資訊。
+
+例如上述的索引 `GlyphID` 標籤索引為 `4`，該 Unicode 為 `uniE12D`，透過 Unicode 為 `uniE12D `找到的輪廓數值與 **FontDrop!** 中的 `(` 會是一模一樣的輪廓座標。
 
 **<p align="center">字型 XML 格式 - TTGlyph 與 contour 標籤</p>**
 <p align="center">
   <img src="../master/Images/Anit-scraping-glyph-contours.png?raw=true" width="640px">
 </p>
 
+#### (3.) cmap 與 map 標籤 - 字型的其他 Unicode 編碼
 
+**cmap** 與 **map** 標籤：這兩個標籤紀錄了字型中每個字的其他 Unicode 編碼，例如這邊我們來看一下 `uniE12D`， 首先 `code` 屬性會看到同樣是同樣數值的 `0xe12d` (其中的 `0x` 可以忽略)，而這個 `code` 屬性表示了其他可以匹配的 Unicode 編碼。
+
+**<p align="center">字型 XML 格式 - cmaps 與 cmap 標籤</p>**
+<p align="center">
+  <img src="../master/Images/Anit-scraping-cmaps.png?raw=true" width="640px">
+</p>
+
+再來繼續尋找，可以接著看到該字型 `(` 其他的 Unicode 編碼，如下圖中其他對應到 `uniE12D` 編碼的 `code` 包含了 `0xe19a` 與 `0e1e4`，把這兩個 Unicode 編碼 `E19A` 與 `E1E4` 對照一下 **FontDrop!** 中便可以找到有一模一樣的數值。
+
+**<p align="center">字型 XML 格式 - 其他的 Unicode 編碼</p>**
+<p align="center">
+  <img src="../master/Images/Anit-scraping-cmaps-other-unichar.png?raw=true" width="640px">
+</p>
 
 
 
