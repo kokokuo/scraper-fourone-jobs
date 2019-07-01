@@ -7,14 +7,14 @@
 
 **<p align="center">「數字求職網」欲爬取的資料與 HTML 源碼</p>**
 <p align="center">
-  <img src="../master/Images/Anti-scraping-1111jobs-apply-contents.png?raw=true" width="640px">
+  <img src="../master/Images/Anti-scraping-fourone-jobs-apply-contents.png?raw=true" width="640px">
 </p>
 
 ## 破解反爬蟲過程
 
 在該程式中的所要擷取的資料來源是徵才頁面[乙級-職業安全衛生管理員(兼職可)](https://www.1111.com.tw/job/85992852/?agent=sticktop_51563220_85992852) 中的應徵資料，而在該應徵資料中的 **信箱**、**市話** 與 **手機**，若透過正常的爬蟲解析方式如 XPath 是無法抓取下來，而會出現意義不明的編碼，透過 HTML 源碼查看確實如此，如下圖：
 
-**<p align="center"> HTML 源碼文字</p>**
+**<p align="center">HTML 源碼文字</p>**
 <p align="center">
   <img src="../master/Images/Anti-scraping-css-font-class-style.png?raw=true" width="640px">
 </p>
@@ -27,7 +27,7 @@
 
 在反爬蟲中，對於顯示資料正常，但 HTML 源碼為亂碼的狀態，通常屬於 JavaScript 加載或是 CSS 的樣式字型編碼的類型，因此通過尋找，我們先發現 CSS 樣式 Class `txticon`，並且循著來源發現了一個自定義 `font-family` 數值 `'runes'`：
 
-**<p align="center"> txticon 的 CSS 定義</p>**
+**<p align="center">txticon 的 CSS 定義</p>**
 <p align="center">
   <img src="../master/Images/Anti-scraping-css-font-family-and-font-file.png?raw=true" width="640px">
 </p>
