@@ -128,6 +128,13 @@ font.saveXML("保存的路徑")
   <img src="../master/Images/Anti-scraping-font-glyph-ids.png?raw=true" width="640px">
 </p>
 
+而在 Python 的 `fonttools` 中，可以透過呼叫 `getGlyphOrder` 方法來取得 `GlyphOrder` 標籤：
+
+```python
+# getGlyphOrder 會回傳陣列，該陣列會以 GlyphOrder 中的 GlyphID 索引為依序排列
+orders: List[str] = font.getGlyphOrder()
+```
+
 #### (2.) TTGlyph 與 contour 標籤 - 字型的輪廓與描述輪廓的座標
 
 **TTGlyph** 與 **contour** 標籤： **TTGlyph** 會紀錄 **GlyphID** 文字代表的 Unicode 編碼在字型檔中的「輪廓資訊」，包含該字型的最小最大 X, Y 寬高，以及由標籤 **contour** 所組成的「輪廓描繪座標」。
@@ -157,6 +164,9 @@ font.saveXML("保存的路徑")
   <img src="../master/Images/Anit-scraping-cmaps-other-unichar.png?raw=true" width="640px">
 </p>
 
+到此這些就是在實作解析字型檔時，可以協助我們判斷的「標籤」與「屬性」，雖然我們可以透過一些軟體，如 **FontCreator** 或 **FontDrop!** 以視覺化的方式快速分析字型檔，但是仍建議儲存成 XML 檔案來協助我們判斷細節。
+
+接下來就讓我們回到一開始爬取下來的亂碼資料，並接著分析對照與翻譯。
 
 
 
