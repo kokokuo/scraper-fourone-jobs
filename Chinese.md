@@ -13,7 +13,7 @@
 ## 開發環境與套件
 - 開發環境： `vscode`
 - 語言版本： `Python 3.7`
-- 安裝套件： `pipenv`, `foottools`, `lxml`, `requests`
+- 安裝套件： `pipenv`, `fonttools`, `lxml`, `requests`
 
 
 ## 破解反爬蟲過程
