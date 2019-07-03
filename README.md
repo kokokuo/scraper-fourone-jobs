@@ -1,7 +1,6 @@
 # scraper-fourone-jobs
 
-[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
-
+[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html) [![Python 3.7.1](https://img.shields.io/badge/Python-3.7.1-blue.svg)](https://www.python.org/downloads/release/python-371/)
 
 
 **scraper-fourone-jobs** is a anti-scraping cracker for extracting apply information of one of Taiwan famous [jobs recruiting website](https://1111.com.tw), this program only for learning and researching how to crack anti-scraping, please **DO NOT use for commercial**.
