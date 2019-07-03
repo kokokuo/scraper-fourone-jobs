@@ -60,7 +60,7 @@
 
 這也是為何我們才需要下載字型並先解析內容，透過程式來幫我們翻譯成正確的內容，這裡可能會問，為何我們需要自己翻譯，可以對方的網站不是只要把字型檔掛上去就可以了嗎？ 那是因為這些工作由瀏覽器做掉了，但是我們的程式不是瀏覽器，所以我們要自己來做。
 
-#### (1.) 透過 FontCreator 或 FontDrop 分析字型檔
+### 3.1 透過 FontCreator 或 FontDrop 分析字型檔
 
 接著聊到解析了， 這邊推薦如果是 Windows 系統，可以去安裝 **[FontCreator](https://www.linksoft.com.tw/product/fontcreator)** 這套軟體，並且透過這套軟體以視覺化的形式查看裡面的字型，與每個字型會有對應的 16 進制 Unicode 編碼，例如下圖：
 
@@ -94,7 +94,7 @@
 
 因為上述兩個參數，會隨著 CSS 反爬蟲的難度，而有不同的因素關鍵，幫助我們判別，後面的例子會提到，因此先記住便可。
 
-#### (2.) 透過 Python 的 FontTools 以 XML 格式解析字型檔
+### 3.2 透過 Python 的 FontTools 以 XML 格式解析字型檔
 
 上述分析後大致上知道原因，接著我們就要來透過程式處理。安裝 Python 的 `fonttools` 套件，該套件可以讀取字型檔案的內容，安裝完後可以透過 `TTFont` 直接載入檔案路徑，或是二進制內容，並且我們先透過 `saveXML` 方法存成 XML 格式：
 
@@ -119,7 +119,7 @@ font.saveXML("保存的路徑")
 
 那麼接著我們來打開保存的 XML 格式字型檔來認識認識。
 
-##### GlyphOrder 與 GlyphID 標籤 - 字型的索引編號與代表的 Unicode 編碼
+#### (1.) GlyphOrder 與 GlyphID 標籤 - 字型的索引編號與代表的 Unicode 編碼
 
 **GlyphOrder** 與 **GlyphID** 標籤：會有序的紀錄該字型檔的所有字型。每個 **GlyphID** 標籤藉由 **索引 (Index)** 以及各自代表的 **Unicode** 編碼來代表字型。這也可以對照到前面的 **FontDrop!** 中的 **Index** 資訊，因此便可以透過該 **Index** 得知彼此在 **FontDrop!** 上所呈現的字型是什麼文字。
 
@@ -137,7 +137,7 @@ font.saveXML("保存的路徑")
 orders: List[str] = font.getGlyphOrder()
 ```
 
-##### TTGlyph 與 contour 標籤 - 字型的輪廓與描述輪廓的座標
+#### (2.) TTGlyph 與 contour 標籤 - 字型的輪廓與描述輪廓的座標
 
 **TTGlyph** 與 **contour** 標籤： **TTGlyph** 會紀錄 **GlyphID** 文字代表的 Unicode 編碼在字型檔中的「輪廓資訊」，包含該字型的最小最大 X, Y 寬高，以及由標籤 **contour** 所組成的「輪廓描繪座標」。
 
@@ -150,7 +150,7 @@ orders: List[str] = font.getGlyphOrder()
   <img src="../master/Images/Anit-scraping-glyph-contours.png?raw=true" width="640px">
 </p>
 
-##### cmap 與 map 標籤 - 字型的其他 Unicode 編碼
+#### (3.) cmap 與 map 標籤 - 字型的其他 Unicode 編碼
 
 **cmap** 與 **map** 標籤：這兩個標籤紀錄了字型中每個字的其他 Unicode 編碼，例如這邊我們來看一下 `uniE12D`， 首先 `code` 屬性會看到同樣是同樣數值的 `0xe12d` (其中的 `0x` 可以忽略)，而這個 `code` 屬性表示了其他可以匹配的 Unicode 編碼。
 
