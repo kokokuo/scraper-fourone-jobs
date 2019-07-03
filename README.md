@@ -12,8 +12,11 @@ The project was completed in **2019.06.28**, and the website will change to othe
   <img src="../master/Images/Anti-scraping-fourone-jobs-apply-contents.png?raw=true" width="640px">
 </p>
 
-
 ## Prerequisite
 - Development enviroment： `vscode`
 - Language version： `Python 3.7`
 - Package： `pipenv`, `fonttools`, `lxml`, `requests`
+
+
+## Reminder
+If there is anyone saw this repository, remind again, this program only for learning and researching how to crack anti-scraping, please **DO NOT use for commercial**, and this repository adopt **GPL v2.0** to prevent anyone for using the program for commercial.
