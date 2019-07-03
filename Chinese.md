@@ -10,6 +10,12 @@
   <img src="../master/Images/Anti-scraping-fourone-jobs-apply-contents.png?raw=true" width="640px">
 </p>
 
+## 開發環境與套件
+開發環境： `vscode`
+語言版本： `Python 3.7`
+安裝套件： `pipenv`, `foottools`, `lxml`, `requests`
+
+
 ## 破解反爬蟲過程
 
 在該程式中的所要擷取的資料來源是徵才頁面[乙級-職業安全衛生管理員(兼職可)](https://www.1111.com.tw/job/85992852/?agent=sticktop_51563220_85992852) 中的應徵資料，而在該應徵資料中的 **信箱**、**市話** 與 **手機**，若透過正常的爬蟲解析方式如 XPath 是無法抓取下來，而會出現意義不明的編碼，透過 HTML 源碼查看確實如此，如下圖：
@@ -244,10 +250,6 @@ orders: Dict[str, str] = font.getBestCamp()
 當然這還算是容易的，如果每次請求下來的字型檔案內部的索引文字順序皆不同，那麼就要透過 `TTFGlyph` 的 `contour` 比對字型輪廓座標。
 
 更複雜的，若是連每一次的輪廓座標也不同，那麼步驟五的建立索引與文字字典，就不能使用了，要改成 OCR 做辨認了..。
-
-
-
-
 
 ## 參考文章
 1. [爬蟲之字型反爬（一）起點網](https://www.itread01.com/content/1544058306.html)
