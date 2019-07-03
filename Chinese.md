@@ -85,7 +85,7 @@
   <img src="../master/Images/FontDrop-Sample-2-View-Detail.png?raw=true" width="640px">
 </p>
 
-首先是 Unicode 的編碼變多了，為什麼？ 其實每個字型並非只有一個代表的 Unicode 對應碼，可以很多不同的編碼皆適用，只是都會有一個代表碼，而代表碼會是顯示第一個，例如這邊的例子 `(` 會是 `E12D`。
+首先是 Unicode 的編碼變多了，為什麼？ 其實每個字型並非只有一個代表的 Unicode 對應碼，可以很多不同的編碼皆適用，只是都會有一個代表碼，而代表碼會是顯示第一個，例如這邊的例子 `(` 會是 `E19B`。
 
 另外兩個比較重要的訊息分別是 **Index** 與 **Contours data**：
 
@@ -123,7 +123,7 @@ font.saveXML("保存的路徑")
 
 **GlyphOrder** 與 **GlyphID** 標籤：會有序的紀錄該字型檔的所有字型。每個 **GlyphID** 標籤藉由 **索引 (Index)** 以及各自代表的 **Unicode** 編碼來代表字型。這也可以對照到前面的 **FontDrop!** 中的 **Index** 資訊，因此便可以透過該 **Index** 得知彼此在 **FontDrop!** 上所呈現的字型是什麼文字。
 
-例如下圖中，我們看一下索引為 `4` 的 Unicode 編碼為 `uniE12D`，而對照一開始的 **FontDrop!** 會是 `(` 。
+例如下圖中，我們看一下索引為 `4` 的 Unicode 編碼為 `uniE19B`，而對照一開始的 **FontDrop!** 會是 `(` 。
 
 **<p align="center">字型 XML 格式 - GlyphOrder 與 GlyphID 標籤</p>**
 <p align="center">
@@ -137,38 +137,88 @@ font.saveXML("保存的路徑")
 orders: List[str] = font.getGlyphOrder()
 ```
 
+**<p align="center">getGlyphOrder 方法顯示</p>**
+<p align="center">
+  <img src="../master/Images/python-font-getGlyphOrder.png?raw=true" width="640px">
+</p>
+
+<br/>
+
 #### (2.) TTGlyph 與 contour 標籤 - 字型的輪廓與描述輪廓的座標
 
 **TTGlyph** 與 **contour** 標籤： **TTGlyph** 會紀錄 **GlyphID** 文字代表的 Unicode 編碼在字型檔中的「輪廓資訊」，包含該字型的最小最大 X, Y 寬高，以及由標籤 **contour** 所組成的「輪廓描繪座標」。
 
 因為字型檔中的字型是透過輪廓描述並識別的，因此不會有任何標籤告知該字型是什麼「字」，而是只會紀錄該字的「輪廓」，只是我們透過軟體看得出是什麼文字而已。另外這些輪廓做標可以在 **FontDrop!** 中也能找到一樣的資訊。
 
-例如上述的索引 `GlyphID` 標籤索引為 `4`，該 Unicode 為 `uniE12D`，透過 Unicode 為 `uniE12D `找到的輪廓數值與 **FontDrop!** 中的 `(` 會是一模一樣的輪廓座標。
+例如上述的索引 `GlyphID` 標籤索引為 `4`，該 Unicode 為 `uniE19B`，透過 Unicode 為 `uniE19B `找到的輪廓數值與 **FontDrop!** 中的 `(` 會是一模一樣的輪廓座標。
 
 **<p align="center">字型 XML 格式 - TTGlyph 與 contour 標籤</p>**
 <p align="center">
   <img src="../master/Images/Anit-scraping-glyph-contours.png?raw=true" width="640px">
 </p>
 
+在 `fonttools` 中，可以透過 `get` 方法帶入 `glyf` 標籤值直接取出所有的 `TTGlyph` 標籤並尋找要的輪廓值，如下：
+
+**<p align="center">字型 XML 格式 - TTGlyph 與 contour 標籤</p>**
+<p align="center">
+  <img src="../master/Images/python-get-glyph-coordinates.png?raw=true" width="640px">
+</p>
+
+<br/>
+
 #### (3.) cmap 與 map 標籤 - 字型的其他 Unicode 編碼
 
-**cmap** 與 **map** 標籤：這兩個標籤紀錄了字型中每個字的其他 Unicode 編碼，例如這邊我們來看一下 `uniE12D`， 首先 `code` 屬性會看到同樣是同樣數值的 `0xe12d` (其中的 `0x` 可以忽略)，而這個 `code` 屬性表示了其他可以匹配的 Unicode 編碼。
+**cmap** 與 **map** 標籤：這兩個標籤紀錄了字型中每個字的其他 Unicode 編碼，例如這邊我們來看一下 `uniE0AF`， 首先 `code` 屬性會看到同樣是同樣數值的 `0xe0af` (其中的 `0x` 可以忽略)，而這個 `code` 屬性表示了其他可以匹配的 Unicode 編碼。
 
 **<p align="center">字型 XML 格式 - cmaps 與 cmap 標籤</p>**
 <p align="center">
   <img src="../master/Images/Anit-scraping-cmaps.png?raw=true" width="640px">
 </p>
 
-再來繼續尋找，可以接著看到該字型 `(` 其他的 Unicode 編碼，如下圖中其他對應到 `uniE12D` 編碼的 `code` 包含了 `0xe19a` 與 `0e1e4`，把這兩個 Unicode 編碼 `E19A` 與 `E1E4` 對照一下 **FontDrop!** 中便可以找到有一模一樣的數值。
+再來尋找我們原先想要的例子 `uniE19B`，可以接著看到該字型 `(` 其他的 Unicode 編碼，如下圖中除了自己本身的 `code` 為 `0xe19b` 外，其他對應到 `uniE19B` 編碼的 `code` 包含了 `0xe20b` 與 `0xe248`，把這兩個 Unicode 編碼 `E20B` 與 `E248` 對照一下 **FontDrop!** 中便可以找到有一模一樣的數值。
 
 **<p align="center">字型 XML 格式 - 其他的 Unicode 編碼</p>**
 <p align="center">
   <img src="../master/Images/Anit-scraping-cmaps-other-unichar.png?raw=true" width="640px">
 </p>
 
+在 `fonttools` 中，可以透過呼叫 `getBestCamp` 方法來取得最佳的 `cmap` 標籤與資訊，因為字型檔案中有對應不同 platform 的版本 - `cmap_format_4` 與 `cmap_format_6`。
+
+```python
+# 回傳的會是字典格式
+orders: Dict[str, str] = font.getBestCamp()
+```
+
+**<p align="center">getBestCamp 方法取得最佳的 cmap 資訊</p>**
+<p align="center">
+  <img src="../master/Images/python-font-getBestCamp.png?raw=true" width="640px">
+</p>
+
+如上圖在 `fonttools` 中會把 `code` 轉換成 10 進制的資料，因此原本的 `uniE19B` 的 `code` 為 `0xe19b` 便會轉換成 `57755`，所以在使用時，要近得處理進制轉換，看是要以十進制比對，還是把 `57755` 轉換成 `0xe19b` 比對。
+
+<br/>
+
 到此這些就是在實作解析字型檔時，可以協助我們判斷的「標籤」與「屬性」，雖然我們可以透過一些軟體，如 **FontCreator** 或 **FontDrop!** 以視覺化的方式快速分析字型檔，但是仍建議儲存成 XML 檔案來協助我們判斷細節。
 
 接下來就讓我們回到一開始爬取下來的亂碼資料，透過先前所介紹的方式來解析與翻譯吧！
+
+<br/>
+
+### 4. 解析 HTML 源碼亂碼的編碼並分析翻譯
+
+雖然在 HTML 源碼看到的亂碼，但那其實代表的只是因為該「編碼」魔有對應的文字而已，所以當我們抓下來貼到 Python 上時，你會看到該 Unicode 的編碼，如下圖：
+
+**<p align="center">Python 3 顯示該 HTML 源碼字串編碼</p>**
+<p align="center">
+  <img src="../master/Images/python-show-unicode-encoding-way.png?raw=true" width="640px">
+</p>
+
+不過因為 Python 3 的字串是 Unicode 格式，所以當你在 Python 中 `print` 顯示時會被自動轉換，也就看不到原來的編碼樣子。當然在做字串中的字元比對翻譯時也會照成影響，所以我們可以透過 `encode` 指定 `unicode-escape` 跳脫字元協助並轉換回 UTF8 編碼，這樣再對 `\\u` 做字串切割並依序匹配即可。
+
+**<p align="center">藉由 unicode-escape 協助字元比對</p>**
+<p align="center">
+  <img src="../master/Images/python-unicode-escape.png?raw=true" width="640px">
+</p>
 
 
 
