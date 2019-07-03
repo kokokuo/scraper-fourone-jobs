@@ -94,9 +94,9 @@
 
 因為上述兩個參數，會隨著 CSS 反爬蟲的難度，而有不同的因素關鍵，幫助我們判別，後面的例子會提到，因此先記住便可。
 
-### 3.2 透過 Python 的 FontTools 以 XML 格式解析字型檔
+### 3.2 透過 Python 的 FontTools 解析字型檔
 
-上述分析後大致上知道原因，接著我們就要來透過程式處理。安裝 Python 的 `fonttools` 套件，該套件可以讀取字型檔案的內容，安裝完後可以透過 `TTFont` 直接載入檔案路徑，或是二進制內容，並且我們先透過 `saveXML` 方法存成 XML 格式：
+上述分析後大致上知道原因，接著我們就用透過程式處理。安裝 Python 的 `fonttools` 套件，該套件可以讀取字型檔案的內容，安裝完後可以透過 `TTFont` 直接載入檔案路徑，或是二進制內容，並且我們先透過 `saveXML` 方法存成 XML 格式：
 
 ```python
 import io
@@ -139,7 +139,7 @@ orders: List[str] = font.getGlyphOrder()
 
 **<p align="center">getGlyphOrder 方法顯示</p>**
 <p align="center">
-  <img src="../master/Images/python-font-getGlyphOrder.png?raw=true" width="640px">
+  <img src="../master/Images/python-font-getGlyphOrder.png?raw=true">
 </p>
 
 <br/>
@@ -161,7 +161,7 @@ orders: List[str] = font.getGlyphOrder()
 
 **<p align="center">字型 XML 格式 - TTGlyph 與 contour 標籤</p>**
 <p align="center">
-  <img src="../master/Images/python-get-glyph-coordinates.png?raw=true" width="640px">
+  <img src="../master/Images/python-get-glyph-coordinates.png?raw=true">
 </p>
 
 <br/>
@@ -210,14 +210,14 @@ orders: Dict[str, str] = font.getBestCamp()
 
 **<p align="center">Python 3 顯示該 HTML 源碼字串編碼</p>**
 <p align="center">
-  <img src="../master/Images/python-show-unicode-encoding-way.png?raw=true" width="640px">
+  <img src="../master/Images/python-show-unicode-encoding-way.png?raw=true">
 </p>
 
 不過因為 Python 3 的字串是 Unicode 格式，所以當你在 Python 中 `print` 顯示時會被自動轉換，也就看不到原來的編碼樣子。當然在做字串中的字元比對翻譯時也會照成影響，所以我們可以透過 `encode` 指定 `unicode-escape` 跳脫字元協助並轉換回 UTF8 編碼，這樣再對 `\\u` 做字串切割並依序匹配即可。
 
 **<p align="center">藉由 unicode-escape 協助字元比對</p>**
 <p align="center">
-  <img src="../master/Images/python-unicode-escape.png?raw=true" width="640px">
+  <img src="../master/Images/python-unicode-escape.png?raw=true">
 </p>
 
 
