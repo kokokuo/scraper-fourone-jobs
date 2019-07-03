@@ -1,4 +1,7 @@
 # scraper-fourone-jobs
+
+[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html) [![Python 3.7.1](https://img.shields.io/badge/Python-3.7.1-blue.svg)](https://www.python.org/downloads/release/python-371/)
+
 **scraper-fourone-jobs** 是破解某 [數字求職網站](https://1111.com.tw) 徵才頁中的應徵資料的爬蟲程式，該程式僅為學習研究使用，並專注在破解反爬蟲的部分，請勿使用程式在商業用途。
 
 會有該專案的原因是因在 Python Taiwan 看見有人詢問如何抓取並突破反爬蟲，在回答對方的過程中，認為還是要自己寫一次才能找出所有原因，畢竟反爬蟲的方式有許多種，每一種也有變形，所以才會動手開發與破解該網站的反爬蟲。
