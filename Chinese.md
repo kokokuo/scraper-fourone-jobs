@@ -251,9 +251,14 @@ orders: Dict[str, str] = font.getBestCamp()
 
 更複雜的，若是連每一次的輪廓座標也不同，那麼步驟五的建立索引與文字字典，就不能使用了，要改成 OCR 做辨認了..。
 
+## 提醒
+若是有人看見此篇，再次強烈提醒該專案與介紹僅為學術研究，切勿拿來作為非法用途，或是使用在商業用途，為了保護網站的營業造成損失，該專案已採用 **GPL v2.0** 協議以避免被放大利用。
+
 ## 參考文章
 1. [爬蟲之字型反爬（一）起點網](https://www.itread01.com/content/1544058306.html)
 2. [Python：爬蟲例項 2：爬取貓眼電影——破解字型反爬](https://www.itread01.com/content/1542776590.html)
 3. [爬蟲之字型反爬（三）汽車之家](https://www.itread01.com/content/1547172845.html)
 4. [Python 爬蟲六：字型反爬處理（貓眼+汽車之家）-2018.10](https://www.itread01.com/content/1544669846.html)
-
+5. [Python3 使用 unicode-escape 处理 unicode 16 进制字符串编解码问题](https://blog.csdn.net/chuatony/article/details/72628868)
+6. [how do I .decode('string-escape') in Python3?](https://stackoverflow.com/questions/14820429/how-do-i-decodestring-escape-in-python3)
+7. [How do I convert hex to decimal in Python? [duplicate]](https://stackoverflow.com/questions/9210525/how-do-i-convert-hex-to-decimal-in-python)
