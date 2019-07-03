@@ -1,7 +1,7 @@
 # scraper-fourone-jobs
-**scraper-fourone-jobs** is a anti-scraping cracker for extracting apply information of one of Taiwan famous [jobs recruiting website](https://1111.com.tw), this program only for learning and researching how to crack anti-scraping, please **DO NOT** use for commercial.
+**scraper-fourone-jobs** is a anti-scraping cracker for extracting apply information of one of Taiwan famous [jobs recruiting website](https://1111.com.tw), this program only for learning and researching how to crack anti-scraping, please **DO NOT use for commercial**.
 
-[中文版請點擊此](master/Chinese.md)
+[中文版請點擊此](../master/Chinese.md)
 
 The reason for creating the project is that saw a question that someone asked how to do scraping for this website in "**Python Taiwan Community**" of Facebook group, and in the processing of answering, I think that need to write program by myself, and then will know what the detail, even though there are some tips how to crack.
 
@@ -13,3 +13,7 @@ The project was completed in **2019.06.28**, and the website will change to othe
 </p>
 
 
+## Prerequisite
+- Development enviroment： `vscode`
+- Language version： `Python 3.7`
+- Package： `pipenv`, `fonttools`, `lxml`, `requests`
