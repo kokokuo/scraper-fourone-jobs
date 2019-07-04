@@ -3,7 +3,6 @@ import io
 from typing import List, Dict
 import requests
 from requests import Response
-import colored
 from fontTools.ttLib import TTFont
 from scraping.dto import WOFFContent
 from settings import Config
