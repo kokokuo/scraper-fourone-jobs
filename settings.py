@@ -2,7 +2,7 @@ from typing import Dict
 
 
 class Config(object):
-    SITE_URL = "https://www.1111.com.tw/job/85992852/?agent=sticktop_51563220_85992852"
+    SITE_URL = "https://www.xxx.com.tw/job/85992852/?agent=sticktop_51563220_85992852"
 
     """
     FONT_CSS_HREF_XPATH: Font 所在的 XPATH 標籤 Href
@@ -11,7 +11,7 @@ class Config(object):
     FONT_RES_FILE_WOFF_EXTENSION: 字型資源檔的格式副檔名，也是要取代 FONT_CSS_REPLACEMENT_PATTERN 的詞
     """
     FONT_CSS_HREF_XPATH = "/html/head/link[1]/@href"
-    FONT_CSS_HREF_PATH_PREFIX = "https://www.1111.com.tw/webService/NET40/Runes/fonts/Books"
+    FONT_CSS_HREF_PATH_PREFIX = "https://www.xxx.com.tw/webService/NET40/Runes/fonts/Books"
     FONT_CSS_REPLACEMENT_PATTERN = r".css$"
     FONT_RES_FILE_WOFF_EXTENSION = ".woff?v0001"
 
