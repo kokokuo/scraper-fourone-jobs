@@ -1,49 +1,49 @@
 # scraper-fourone-jobs
 
+## Notification
+You're welcome to come to this repository. If you like the repository, hope you could give me a Star. If you are interested, the current English translation is in progress. Really welcome the **fork** project and assist to translate and send PR :)
+
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html) [![Python 3.7.1](https://img.shields.io/badge/Python-3.7.1-blue.svg)](https://www.python.org/downloads/release/python-371/)
 
 <p align="center">
   <img src="../master/Images/Program-Result.png?raw=true" width="640px">
 </p>
 
+scraper-fourone-jobs is a anti-scraping cracker for extracting apply information of one of Taiwan famous [jobs recruiting website](https://1111.com.tw), this program only for learning and researching how to crack anti-scraping, please **DO NOT use for commercial**.
 
-scraper-fourone-jobs 是破解某 [數字求職網站](https://1111.com.tw) 徵才頁中的應徵資料的爬蟲程式，該程式僅為學習研究使用，並專注在破解反爬蟲的部分，請勿使用程式在商業用途。
+The reason for creating the project is that saw a question that someone asked how to do scraping for this website in "Python Taiwan Community" of Facebook group, and in the processing of answering, I think that need to write program by myself, and then will know what the detail, even though there are some tips how to crack.
 
-會有該專案的原因是因在 Python Taiwan 看見有人詢問如何抓取並突破反爬蟲，在回答對方的過程中，認為還是要自己寫一次才能找出所有原因，畢竟反爬蟲的方式有許多種，每一種也有變形，所以才會動手開發與破解該網站的反爬蟲。
+The project was completed in 2019.06.28, and the website will change to other anti-scraping method by the time, so the program will crashed in the future. If you discover the problem, free feel to send a PR or Issue thanks!
 
-另外因該專案是在 2019.06.28 撰寫開發並完成，因此未來可能因該「數字求職網」改變反爬蟲的方法而導致此程式失效，若發現失效歡迎發 Pull Request 或是開 Issue 清單，感謝。
-
-**<p align="center">「數字求職網」欲爬取的資料與 HTML 源碼</p>**
+**<p align="center">The data would lke to scrape and show the HTML source.</p>**
 <p align="center">
   <img src="../master/Images/Anti-scraping-fourone-jobs-apply-contents.png?raw=true" width="640px">
 </p>
 
-## 開發環境與套件
-- 開發環境： `vscode`
-- 語言版本： `Python 3.7`
-- 安裝套件： `pipenv`, `fonttools`, `lxml`, `requests`
+## Prerequisite
+- Development enviroment： `vscode`
+- Language version： `Python 3.7`
+- Package： `pipenv`, `fonttools`, `lxml`, `requests`
 
+## How to Crack
 
-## 破解反爬蟲過程
+The program which would like to scrape and extract data is from the recruitment page [乙級-職業安全衛生管理員(兼職可)](https://www.1111.com.tw/job/85992852/?agent=sticktop_51563220_85992852) and the data "email", "telephone" and "mobile" could not scrape from correct way like XPATH, it's will show unmeaningful data and encoding, here is the HTML page source as below.
 
-在該程式中的所要擷取的資料來源是徵才頁面[乙級-職業安全衛生管理員(兼職可)](https://www.1111.com.tw/job/85992852/?agent=sticktop_51563220_85992852) 中的應徵資料，而在該應徵資料中的「信箱」、「市話」與 「手機」，若透過正常的爬蟲解析方式如 XPath 是無法抓取下來，而會出現意義不明的編碼，透過 HTML 源碼查看確實如此，如下圖：
-
-**<p align="center">HTML 源碼文字</p>**
+**<p align="center">HTML Page Source Content</p>**
 <p align="center">
   <img src="../master/Images/Anti-scraping-css-font-class-style.png?raw=true" width="640px">
 </p>
 
 
-**備註** ： 以下開始介紹該「數字求職網站」的分析與破解反爬蟲過程，因為過程可以會對該網站造成營業損失，所以不會全部公開細節與過程，**並請「勿」使用該程式在商業用途**。另外該源碼會採用 **GNU General Public License v2.0**。
+**Attention** ： From Here, the document will introduce how to crack, but not reveal all information for protecting the jobs recruiting website. Please **DO NOT** use the program for commercial use, and the source code adopt **GNU General Public License v2.0**.
 
-
-### 1. 分析反爬蟲類型
+### 1. Anti-scraping analyzing
 
 在反爬蟲中，對於顯示資料正常，但 HTML 源碼為亂碼的狀態，通常不外乎屬於可以較晚加載處理，影響 HTML 源碼內容與顯示的 JavaScript 或是 CSS 的樣式字型編碼的類型。像是 JavaScript 可以在觸發某個行為或是透過計時改變 HTML 的顯示或內容；而 CSS 會透過樣式來改變原本 HTML 的外觀，所以不外乎會是這兩個選擇之一優先考慮。
 
 接著溝通時間分析與過濾發現了 CSS 樣式 Class `txticon` 是可能的原因，並且循著來源發現了一個自定義 `font-family` 數值 `'runes'`：
 
-**<p align="center">txticon 的 CSS 定義</p>**
+**<p align="center">The CSS style declaration of txticon</p>**
 <p align="center">
   <img src="../master/Images/Anti-scraping-css-font-family-and-font-file.png?raw=true" width="640px">
 </p>
@@ -52,7 +52,7 @@ scraper-fourone-jobs 是破解某 [數字求職網站](https://1111.com.tw) 徵�
 
 <br/>
 
-### 2.尋找 CSS 編碼反爬蟲的字型檔
+### 2. Search font file used for encoding of CSS anti-scraping
 
 因為 `font-family`提供的字型來源是自定義的，那麼一定需要夾帶著該檔案才能正常顯示文字。因此接著繼續尋找，便會發現一個路徑為 `webService/NET40/Runes/fonts/Books`的目錄，並且底下有兩個檔案，皆是看似亂碼的名稱與兩個不同的副檔名  `.css` 與 `.woff?v0001`。
 
@@ -71,7 +71,7 @@ scraper-fourone-jobs 是破解某 [數字求職網站](https://1111.com.tw) 徵�
 
 <br/>
 
-### 3. 下載字型檔案與分析
+### 3. Download font file for analyzing
 
 下載了字型檔案後，要開始解析字型的格式，因為這些字型都都會紀錄了不同的文字，以及這些文字要顯示的編碼。
 
@@ -79,7 +79,7 @@ scraper-fourone-jobs 是破解某 [數字求職網站](https://1111.com.tw) 徵�
 
 這也是為何需要下載字型並先解析內容，透過程式來協助翻譯成正確的內容，因為爬蟲程式不是瀏覽器，所以要自己來做。
 
-### 3.1 透過 FontCreator 或 FontDrop 分析字型檔
+### 3.1 Analyze font content by FontCreator or FontDrop
 
 接著聊到解析了， 這邊推薦如果是 Windows 系統，可以去安裝 **[FontCreator](https://www.linksoft.com.tw/product/fontcreator)** 這套軟體，並且透過這套軟體以視覺化的形式查看裡面的字型，與每個字型會有對應的 16 進制 Unicode 編碼，例如下圖：
 
@@ -113,7 +113,7 @@ scraper-fourone-jobs 是破解某 [數字求職網站](https://1111.com.tw) 徵�
 
 因為上述兩個參數，會隨著 CSS 反爬蟲的難度，而有不同的因素關鍵，幫助判別，後面的例子會提到，因此先記住便可。
 
-### 3.2 透過 Python 的 FontTools 解析字型檔
+### 3.2 Use fonttools of python package to read data 
 
 上述分析後大致上知道原因，接著就用透過程式處理。安裝 Python 的 `fonttools` 套件，該套件可以讀取字型檔案的內容，安裝完後可以透過 `TTFont` 直接載入檔案路徑，或是二進制內容，並且先透過 `saveXML` 方法存成 XML 格式：
 
@@ -138,7 +138,7 @@ font.saveXML("保存的路徑")
 
 那麼接著來打開保存的 XML 格式字型檔來認識認識。
 
-#### (1.) GlyphOrder 與 GlyphID 標籤 - 字型的索引編號與代表的 Unicode 編碼
+#### (1.) `GlyphOrder` and `GlyphID` tags - Font indexing and unicode mapping
 
 **GlyphOrder** 與 **GlyphID** 標籤：會有序的紀錄該字型檔的所有字型。每個 **GlyphID** 標籤藉由 **索引 (Index)** 以及各自代表的 **Unicode** 編碼來代表字型。這也可以對照到前面的 **FontDrop!** 中的 **Index** 資訊，因此便可以透過該 **Index** 得知彼此在 **FontDrop!** 上所呈現的字型是什麼文字。
 
@@ -162,7 +162,7 @@ orders: List[str] = font.getGlyphOrder()
 </p>
 
 
-#### (2.) TTGlyph 與 contour 標籤 - 字型的輪廓與描述輪廓的座標
+#### (2.) `TTGlyph` and `contour` tags - Font contours and coordinate 
 
 **TTGlyph** 與 **contour** 標籤： **TTGlyph** 會紀錄 **GlyphID** 文字代表的 Unicode 編碼在字型檔中的「輪廓資訊」，包含該字型的最小最大 X, Y 寬高，以及由標籤 **contour** 所組成的「輪廓描繪座標」。
 
@@ -183,7 +183,7 @@ orders: List[str] = font.getGlyphOrder()
 </p>
 
 
-#### (3.) cmap 與 map 標籤 - 字型的其他 Unicode 編碼
+#### (3.) `cmap` and `map` tags  - Other unicode mapping
 
 **cmap** 與 **map** 標籤：這兩個標籤紀錄了字型中每個字的其他 Unicode 編碼，例如這邊的 `uniE0AF`， 首先 `code` 屬性會看到同樣是同樣數值的 `0xe0af` (其中的 `0x` 可以忽略)，而這個 `code` 屬性表示了其他可以匹配的 Unicode 編碼。
 
@@ -259,10 +259,10 @@ orders: Dict[str, str] = font.getBestCamp()
 
 更複雜的，若是連每一次的輪廓座標也不同，那麼步驟五的建立索引與文字字典，就不能使用了，要改成 OCR 做辨認了..。
 
-## 提醒
-若是有人看見此篇，再次強烈提醒該專案與介紹僅為學術研究，「切勿」拿來作為非法用途或使用在商業用途，此外該專案採用 **GNU General Public License v2.0**。
+## Reminder
+If there is anyone saw this repository, remind again, this program only for learning and researching how to crack anti-scraping, please **DO NOT use for commercial**.
 
-## 參考文章
+## Reference
 1. [爬蟲之字型反爬（一）起點網](https://www.itread01.com/content/1544058306.html)
 2. [Python：爬蟲例項 2：爬取貓眼電影——破解字型反爬](https://www.itread01.com/content/1542776590.html)
 3. [爬蟲之字型反爬（三）汽車之家](https://www.itread01.com/content/1547172845.html)
