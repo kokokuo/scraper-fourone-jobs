@@ -34,9 +34,6 @@ The program which would like to scrape and extract data is from the recruitment 
   <img src="../master/Images/Anti-scraping-css-font-class-style.png?raw=true" width="640px">
 </p>
 
-
-**Attention** ： From Here, the document will introduce how to crack, but not reveal all information for protecting the jobs recruiting website. Please **DO NOT** use the program for commercial use.
-
 ### 1. Anti-scraping analyzing
 
 In anti-scraping, ths situation for showing data correct but HTML page source is unmeaningful and weired content, the reason almost caused by Javascript dynamic handling or CSS font encoding. For the javascript, it could change the content after DOM loaded or some event triggred. In CSS, it could change the text style by CSS attribute.
@@ -258,9 +255,6 @@ orders: Dict[str, str] = font.getBestCamp()
 當然這還算是容易的，如果每次請求下來的字型檔案內部的索引文字順序皆不同，那麼就要透過 `TTFGlyph` 的 `contour` 比對字型輪廓座標。
 
 更複雜的，若是連每一次的輪廓座標也不同，那麼步驟五的建立索引與文字字典，就不能使用了，要改成 OCR 做辨認了..。
-
-## Remind
-The project is **only for learning and researching** how to crack anti-scraping, please **DO NOT** use for commercial**.
 
 ## License
 The source code adopt **GNU General Public License v2.0**.
