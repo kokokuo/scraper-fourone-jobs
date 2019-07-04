@@ -35,7 +35,7 @@ The program which would like to scrape and extract data is from the recruitment 
 </p>
 
 
-**Attention** ： From Here, the document will introduce how to crack, but not reveal all information for protecting the jobs recruiting website. Please **DO NOT** use the program for commercial use, and the source code adopt **GNU General Public License v2.0**.
+**Attention** ： From Here, the document will introduce how to crack, but not reveal all information for protecting the jobs recruiting website. Please **DO NOT** use the program for commercial use.
 
 ### 1. Anti-scraping analyzing
 
@@ -259,8 +259,11 @@ orders: Dict[str, str] = font.getBestCamp()
 
 更複雜的，若是連每一次的輪廓座標也不同，那麼步驟五的建立索引與文字字典，就不能使用了，要改成 OCR 做辨認了..。
 
-## Reminder
-If there is anyone saw this repository, remind again, this program only for learning and researching how to crack anti-scraping, please **DO NOT use for commercial**.
+## Disclaimer
+If there is anyone saw this repository, remind again, this program only for learning and researching how to crack anti-scraping, please **DO NOT use for commercial**. If someone used, I'll not have responsibility.
+
+## License
+The source code adopt **GNU General Public License v2.0**.
 
 ## Reference
 1. [爬蟲之字型反爬（一）起點網](https://www.itread01.com/content/1544058306.html)
