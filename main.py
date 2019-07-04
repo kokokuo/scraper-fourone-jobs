@@ -5,14 +5,13 @@ from scraping.parser import ContactPesonParsingService
 from settings import Config
 
 """
-2019.06.26, 因 Python Taiwan 有網友發問如何解析 1111 人力銀行的應徵資料，所以來研究如何找尋
-資料來源： https://www.1111.com.tw/job/85992852/?agent=sticktop_51563220_85992852
-該網站採用 CSS 文字加解密反爬蟲技巧，對含有 txticon 的 CSS 樣式資料，採用了自訂的 Font 格式，並處理解碼因而可以呈現內容。
+2019.06.26, 因 Python Taiwan 有網友發問如何解析有反爬蟲的網頁，所以來研究如何找尋
+發現採用 CSS 文字加解密反爬蟲技巧，對含有 txticon 的 CSS 樣式資料，採用了自訂的 Font 格式，並處理解碼因而可以呈現內容。
 
 解法 :
 1. 找尋 txticon 的 CSS 樣式採用的 font-family: 'runes' 來源 font-face 檔案內容
 2. 下載檔案 'runes' 文字的 woff 格式，並透過 Font 線上檢視服務 「FontDrop」 查看其對照編媽，並確認是否可以解碼出內容
-3. 確認可以後，因為該檔案是由後端自動產生，並夾帶在前端，需要解析網頁有無 https://www.1111.com.tw/webService/NET40/Runes/fonts/Books/
+3. 確認可以後，因為該檔案是由後端自動產生，並夾帶在前端，需要解析網頁有無 /webService/NET40/Runes/fonts/Books/
 來源的 link 檔案，找到此檔案下載至爬蟲程式的文件中
 4. 透過 Python 的 FontTool 套件取出對應的關係資料
 """
