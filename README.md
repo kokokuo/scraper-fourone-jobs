@@ -24,7 +24,7 @@ scraper-fourone-jobs 是破解某 [數字求職網站](https://1111.com.tw) 徵�
 - 安裝套件： `pipenv`, `fonttools`, `lxml`, `requests`
 
 ## 歡迎協助翻譯 🙏🙏🙏
-歡迎你來到此專案，如果你喜歡該專案也願意的話，希望能給我一個 Star，此外若你有興趣的話，目前英文的翻譯正在進行中，非常歡迎 Fork 這個小專案並且協助翻譯哦！
+歡迎你來到此專案，如果你喜歡該專案也願意的話，希望能給我一個 Star，此外若你有興趣的話，目前英文的翻譯正在進行中，非常歡迎 Fork 這個小專案並且 Send PR 協助翻譯哦！
 
 [English version](../master/English.md)
 
