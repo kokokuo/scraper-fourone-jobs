@@ -39,16 +39,16 @@ The program which would like to scrape and extract data is from the recruitment 
 
 ### 1. Anti-scraping analyzing
 
-在反爬蟲中，對於顯示資料正常，但 HTML 源碼為亂碼的狀態，通常不外乎屬於可以較晚加載處理，影響 HTML 源碼內容與顯示的 JavaScript 或是 CSS 的樣式字型編碼的類型。像是 JavaScript 可以在觸發某個行為或是透過計時改變 HTML 的顯示或內容；而 CSS 會透過樣式來改變原本 HTML 的外觀，所以不外乎會是這兩個選擇之一優先考慮。
-
-接著溝通時間分析與過濾發現了 CSS 樣式 Class `txticon` 是可能的原因，並且循著來源發現了一個自定義 `font-family` 數值 `'runes'`：
+In anti-scraping, ths situation for showing data correct but HTML page source is unmeaningful and weired content, the reason almost caused by Javascript dynamic handling or CSS font encoding. For the javascript, it could change the content after DOM loaded or some event triggred. In CSS, it could change the text style by CSS attribute.
+ 
+As time goes by analyzing and reading the source by DevTools, found the possible source is `txticon` ths class selector from CSS, and discover the user defined font value `'runes'` from `font-family` attribute: 
 
 **<p align="center">The CSS style declaration of txticon</p>**
 <p align="center">
   <img src="../master/Images/Anti-scraping-css-font-family-and-font-file.png?raw=true" width="640px">
 </p>
 
-通常看到自定義的 `font-family` 後，那麼機會十之八九就會是 CSS 字型編碼造成的反爬蟲技巧。
+Usually when you found the user defined font value from `font-family`, it's means the anti-scraping method from CSS font encoding.
 
 <br/>
 
