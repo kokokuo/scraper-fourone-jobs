@@ -7,13 +7,13 @@
 </p>
 
 
-scraper-fourone-jobs 是破解某數字求職網站徵才頁中的應徵資料的爬蟲程式，該程式僅為學習研究使用，並專注在破解反爬蟲的部分，請勿使用程式在商業用途。
+scraper-fourone-jobs 是破解某求職網站徵才頁中的應徵資料的爬蟲程式，該程式僅為學習研究使用，並專注在破解反爬蟲的部分，請勿使用程式在商業用途。
 
 會有該專案的原因是因在 Python Taiwan 看見有人詢問如何抓取並突破反爬蟲，在回答對方的過程中，認為還是要自己寫一次才能找出所有原因，畢竟反爬蟲的方式有許多種，每一種也有變形，所以才會動手開發與破解該網站的反爬蟲。
 
 另外因該專案是在 2019.06.28 撰寫開發並完成，因此未來可能因該「數字求職網」改變反爬蟲的方法而導致此程式失效，若發現失效歡迎發 Pull Request 或是開 Issue 清單，感謝。
 
-**<p align="center">「數字求職網」欲爬取的資料與 HTML 源碼</p>**
+**<p align="center">「求職網」欲爬取的資料與 HTML 源碼</p>**
 <p align="center">
   <img src="../master/Images/Anti-scraping-fourone-jobs-apply-contents.png?raw=true" width="640px">
 </p>
@@ -88,7 +88,7 @@ scraper-fourone-jobs 是破解某數字求職網站徵才頁中的應徵資料�
   <img src="../master/Images/Font-Creator-Sample.png?raw=true" width="640px">
 </p>
 
-在上圖的範例並非該「數字求職網」，而是其他反爬蟲文章解說的[例子截圖](https://www.itread01.com/content/1547172845.html)，會看到字型 `左` 對應到 Unicode 的 `uniED8C` ，而這個 Unicode 就是需要編碼。另外 Unicode 的前綴字 `uni` 可以省略他主要是前面的即可。
+在上圖的範例並非該「求職網」，而是其他反爬蟲文章解說的[例子截圖](https://www.itread01.com/content/1547172845.html)，會看到字型 `左` 對應到 Unicode 的 `uniED8C` ，而這個 Unicode 就是需要編碼。另外 Unicode 的前綴字 `uni` 可以省略他主要是前面的即可。
 
 不過在 MacOSX 上並不能使用 **FontCreator** 這套軟體，此時可以建議使用 **[FontDrop!](https://fontdrop.info/)**，這個字型檢視服務有著完整的檢視功能，只需要把字型檔匯入即可，如下圖，上傳剛剛從「數字求職網」下載的字型檔：
 
