@@ -41,24 +41,24 @@ The program which would like to scrape and extract data is from the recruitment 
 
 In anti-scraping, ths situation for showing data correct but HTML page source is unmeaningful and weired content, the reason almost caused by Javascript dynamic handling or CSS font encoding. For the javascript, it could change the content after DOM loaded or some event triggred. In CSS, it could change the text style by CSS attribute.
  
-As time goes by analyzing and reading the source by DevTools, found the possible source is `txticon` ths class selector from CSS, and discover the user defined font value `'runes'` from `font-family` attribute: 
+As time goes by analyzing and reading the source by DevTools, found the possible source is `txticon` ths class selector from CSS, and discover the user-defined font value `'runes'` from `font-family` attribute: 
 
 **<p align="center">The CSS style declaration of txticon</p>**
 <p align="center">
   <img src="../master/Images/Anti-scraping-css-font-family-and-font-file.png?raw=true" width="640px">
 </p>
 
-Usually when you found the user defined font value from `font-family`, it's means the anti-scraping method from CSS font encoding.
+Usually when you found the user-defined font value from `font-family`, it's means the anti-scraping method from CSS font encoding.
 
 <br/>
 
 ### 2. Search font file used for encoding of CSS anti-scraping
 
-因為 `font-family`提供的字型來源是自定義的，那麼一定需要夾帶著該檔案才能正常顯示文字。因此接著繼續尋找，便會發現一個路徑為 `webService/NET40/Runes/fonts/Books`的目錄，並且底下有兩個檔案，皆是看似亂碼的名稱與兩個不同的副檔名  `.css` 與 `.woff?v0001`。
+Because the font of `font-family ` is user-defined, the source font file must exsit, so the website could show the correct content. After searching the files location further, there were a path called `webService/NET40/Runes/fonts/Books` and the user-defined font CSS `xxxxx.css` was put in here with the font file `xxxxx.woff?v0001` and named randomly.
 
 首先打開副檔名為 `.css` 檔案，就會直接看到定義 `runes` 字型的 `font-face` 屬性，這是在 CSS3 提供的[新屬性](https://developer.mozilla.org/zh-TW/docs/Web/CSS/@font-face)，用來協助開發端可以提供字型給用戶呈現，而這個 `font-face` 也常常被拿來作為 CSS 字型編碼反爬蟲的方式。
 
-**<p align="center">自定義的 font-family 字型字體 runes 所在位置</p>**
+**<p align="center">User-defined font-family font named runes location</p>**
 <p align="center">
   <img src="../master/Images/Anti-scraping-font-face-custom-font-url.png?raw=true" width="640px">
 </p>
