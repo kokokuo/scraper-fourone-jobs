@@ -9,7 +9,7 @@ You're welcome to come to this repository. If you like the repository, hope you 
   <img src="../master/Images/Program-Result.png?raw=true" width="640px">
 </p>
 
-scraper-fourone-jobs is a anti-scraping cracker for extracting apply information of one of Taiwan famous [jobs recruiting website](https://1111.com.tw), this program only for learning and researching how to crack anti-scraping, please **DO NOT use for commercial**.
+scraper-fourone-jobs is a anti-scraping cracker for extracting apply information of one of Taiwan famous [jobs recruiting website](https://1111.com.tw), this program **only for learning and researching how to crack anti-scraping, please DO NOT use for commercial**.
 
 The reason for creating the project is that saw a question that someone asked how to do scraping for this website in "Python Taiwan Community" of Facebook group, and in the processing of answering, I think that need to write program by myself, and then will know what the detail, even though there are some tips how to crack.
 
@@ -258,9 +258,6 @@ orders: Dict[str, str] = font.getBestCamp()
 當然這還算是容易的，如果每次請求下來的字型檔案內部的索引文字順序皆不同，那麼就要透過 `TTFGlyph` 的 `contour` 比對字型輪廓座標。
 
 更複雜的，若是連每一次的輪廓座標也不同，那麼步驟五的建立索引與文字字典，就不能使用了，要改成 OCR 做辨認了..。
-
-## Disclaimer
-If there is anyone saw this repository, remind again, this program only for learning and researching how to crack anti-scraping, please **DO NOT use for commercial**. If someone used, I will not take this responsibility.
 
 ## License
 The source code adopt **GNU General Public License v2.0**.
