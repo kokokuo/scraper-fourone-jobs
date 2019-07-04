@@ -1,6 +1,6 @@
 # scraper-fourone-jobs
 
-## Notification
+## Translation Assistance Need you 🙏🙏🙏
 You're welcome to come to this repository. If you like the repository, hope you could give me a Star. If you are interested, the current English translation is in progress. Really welcome the **fork** project and assist to translate and send PR :)
 
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html) [![Python 3.7.1](https://img.shields.io/badge/Python-3.7.1-blue.svg)](https://www.python.org/downloads/release/python-371/)
