@@ -263,6 +263,9 @@ orders: Dict[str, str] = font.getBestCamp()
 
 更複雜的，若是連每一次的輪廓座標也不同，那麼步驟五的建立索引與文字字典，就不能使用了，要改成 OCR 做辨認了..。
 
+## 提醒
+再次提醒該專案與介紹僅為作為 **學習研究用途，還請勿使用該程式在商業用途**。
+
 ## License
 該專案採用 **GNU General Public License v2.0**。
 
