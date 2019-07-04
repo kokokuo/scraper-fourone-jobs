@@ -37,10 +37,6 @@ scraper-fourone-jobs 是破解某 [數字求職網站](https://1111.com.tw) 徵�
   <img src="../master/Images/Anti-scraping-css-font-class-style.png?raw=true" width="640px">
 </p>
 
-
-**備註** ： 以下開始介紹該「數字求職網站」的分析與破解反爬蟲過程，只作為**學習研究用途，並建議請勿使用該程式在商業用途**。
-
-
 ### 1. 分析反爬蟲類型
 
 在反爬蟲中，對於顯示資料正常，但 HTML 源碼為亂碼的狀態，通常不外乎屬於可以較晚加載處理，影響 HTML 源碼內容與顯示的 JavaScript 或是 CSS 的樣式字型編碼的類型。像是 JavaScript 可以在觸發某個行為或是透過計時改變 HTML 的顯示或內容；而 CSS 會透過樣式來改變原本 HTML 的外觀，所以不外乎會是這兩個選擇之一優先考慮。
@@ -262,9 +258,6 @@ orders: Dict[str, str] = font.getBestCamp()
 當然這還算是容易的，如果每次請求下來的字型檔案內部的索引文字順序皆不同，那麼就要透過 `TTFGlyph` 的 `contour` 比對字型輪廓座標。
 
 更複雜的，若是連每一次的輪廓座標也不同，那麼步驟五的建立索引與文字字典，就不能使用了，要改成 OCR 做辨認了..。
-
-## 提醒
-再次提醒該專案與介紹僅為作為 **學習研究用途，還請勿使用該程式在商業用途**。
 
 ## License
 該專案採用 **GNU General Public License v2.0**。
