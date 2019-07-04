@@ -9,7 +9,7 @@ You're welcome to come to this repository. If you like the repository, hope you 
   <img src="../master/Images/Program-Result.png?raw=true" width="640px">
 </p>
 
-scraper-fourone-jobs is a anti-scraping cracker for extracting apply information of one of Taiwan famous [jobs recruiting website](https://1111.com.tw), this program **only for learning and researching how to crack anti-scraping, please DO NOT use for commercial**.
+scraper-fourone-jobs is a anti-scraping cracker for extracting apply information of one of Taiwan famous jobs recruiting website, this program **only for learning and researching how to crack anti-scraping, please DO NOT use for commercial**.
 
 The reason for creating the project is that saw a question that someone asked how to do scraping for this website in "Python Taiwan Community" of Facebook group, and in the processing of answering, I think that need to write program by myself, and then will know what the detail, even though there are some tips how to crack.
 
@@ -27,7 +27,7 @@ The project was completed in 2019.06.28, and the website will change to other an
 
 ## How to Crack
 
-The program which would like to scrape and extract data is from the recruitment page [乙級-職業安全衛生管理員(兼職可)](https://www.1111.com.tw/job/85992852/?agent=sticktop_51563220_85992852) and the data "email", "telephone" and "mobile" could not scrape from correct way like XPATH, it's will show unmeaningful data and encoding, here is the HTML page source as below.
+The program which would like to scrape and extract data is from the recruitment page and the data "email", "telephone" and "mobile" could not scrape from correct way like XPATH, it's will show unmeaningful data and encoding, here is the HTML page source as below.
 
 **<p align="center">HTML Page Source Content</p>**
 <p align="center">
