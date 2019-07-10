@@ -53,18 +53,20 @@ Usually when you found the user-defined font value from `font-family`, it's mean
 
 Because the font of `font-family ` is user-defined, the source font file must exsit, so the website could show the correct content. After searching the files location further, there were a path called `webService/NET40/Runes/fonts/Books` and the user-defined font CSS `xxxxx.css` was put in here with the font file `xxxxx.woff?v0001` and named randomly.
 
-首先打開副檔名為 `.css` 檔案，就會直接看到定義 `runes` 字型的 `font-face` 屬性，這是在 CSS3 提供的[新屬性](https://developer.mozilla.org/zh-TW/docs/Web/CSS/@font-face)，用來協助開發端可以提供字型給用戶呈現，而這個 `font-face` 也常常被拿來作為 CSS 字型編碼反爬蟲的方式。
+First, open the file which the extension is `.css` and you will see the `font-face` attribute and the user-defined value `runes`. The `font-face` is CSS3 new property and it could assist the developer providing more types of fonts to users, but the more interesting usuage is that `font-face` was used for anti-scraping protection.
+
 
 **<p align="center">User-defined font-family font named runes location</p>**
 <p align="center">
   <img src="../master/Images/Anti-scraping-font-face-custom-font-url.png?raw=true" width="640px">
 </p>
 
-從其中的 `url` 也可以看到該網站使用的字型格式種類，不過目前僅有[「網路開放字型格式」(Web Open Font Format)](https://zh.wikipedia.org/wiki/Web%E9%96%8B%E6%94%BE%E5%AD%97%E5%9E%8B%E6%A0%BC%E5%BC%8F)存在，對照 `webService/NET40/Runes/fonts/Books` 就是副檔名為 `.woff?v0001` 的字型檔。
+And the attribute `url` could discover which font format was used, but only find [(Web Open Font Format)](https://zh.wikipedia.org/wiki/Web%E9%96%8B%E6%94%BE%E5%AD%97%E5%9E%8B%E6%A0%BC%E5%BC%8F), and mapped the file of directory `webService/NET40/Runes/fonts/Books`, the font extension is `.woff?v0001`.
 
-不過通常這類命名像是亂碼的字型非常有可能是**每次請求自動產生**，也很有可能**每次字型檔的編碼內容都不同**，所以需要多次下載檔案，並且跟 HTML 來源的編碼再三確認，是否每次都不同。
+But the file name looks like **automatically and randomly generated**,  the encoding of font content also could be different, so I have to download the file more times and check the HTML scraping source font of encoding again for checking the encoding is different or not.
 
-接著複製該字型檔案的所在 URL 路徑並下載下來，嘗試解析該字型檔的內容，讓爬蟲程式可以透過下載的字型檔案，把抓取下來的在 HTML 上顯示的亂碼文字可以正常顯示。
+Then copy the font file URL path and download it for tring to analyze the content of font. After we know the rule,  we could build a scraper process to automatically download file and parse weird word, then map word to the encoding for translation to correct contents.
+
 
 <br/>
 
