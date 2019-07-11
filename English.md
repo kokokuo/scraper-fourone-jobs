@@ -80,37 +80,38 @@ This is reason why we need to download the font file first. But the problem is t
 
 ### 3.1 Analyze font content by FontCreator or FontDrop
 
-接著聊到解析了， 這邊推薦如果是 Windows 系統，可以去安裝 **[FontCreator](https://www.linksoft.com.tw/product/fontcreator)** 這套軟體，並且透過這套軟體以視覺化的形式查看裡面的字型，與每個字型會有對應的 16 進制 Unicode 編碼，例如下圖：
+After we know the reason, then we start to talk about analysing, if the people use the Windows operation, then suggest to install the software called **[FontCreator](https://www.linksoft.com.tw/product/fontcreator)**. The software could assist us to understand th contents of font file and visualizing the contents, like we could see the 16 bit Unicode each font.
 
-**<p align="center">FontCreator 字型檢視範例</p>**
+**<p align="center">FontCreator Viewer Sample</p>**
 <p align="center">
   <img src="../master/Images/Font-Creator-Sample.png?raw=true" width="640px">
 </p>
 
-在上圖的範例並非該「數字求職網」，而是其他反爬蟲文章解說的[例子截圖](https://www.itread01.com/content/1547172845.html)，會看到字型 `左` 對應到 Unicode 的 `uniED8C` ，而這個 Unicode 就是需要編碼。另外 Unicode 的前綴字 `uni` 可以省略他主要是前面的即可。
+The above image sample are not from "jobs recruiting website", it's another [anti-scraping tutorial sample](https://www.itread01.com/content/1547172845.html). We'll see the font `左` map to the unicode encoding `uniED8C`. (The prefix `uni` we could omit it)
 
-不過在 MacOSX 上並不能使用 **FontCreator** 這套軟體，此時可以建議使用 **[FontDrop!](https://fontdrop.info/)**，這個字型檢視服務有著完整的檢視功能，只需要把字型檔匯入即可，如下圖，上傳剛剛從「數字求職網」下載的字型檔：
+But we could use the **FontCreator** software on a MacOS, so I recommend to use the website service called **[FontDrop!](https://fontdrop.info/)**. **[FontDrop!](https://fontdrop.info/)** has the powerful functions on viewer, we just need to import font file, now upload the font file downloaded from "jobs recruiting website":
 
-**<p align="center">FontDrop! 檢視字型</p>**
+**<p align="center">FontDrop! Viewer</p>**
 <p align="center">
   <img src="../master/Images/FontDrop-Sample-1-View-Fonts.png?raw=true" width="640px">
 </p>
 
-在上圖中會看到不同的字型，且每個字型皆有會顯示該 Unicode 編碼。接著點進去字型後便會看見更多內容：
+We'll see the different fonts on the above image and all of the font map to one unicode encoding, we could click the font to see the detail information:
 
-**<p align="center">FontDrop! 檢視字型細節</p>**
+**<p align="center">FontDrop! Detail Font Viewer</p>**
 <p align="center">
   <img src="../master/Images/FontDrop-Sample-2-View-Detail.png?raw=true" width="640px">
 </p>
 
-首先是 Unicode 的編碼變多了，為什麼？ 其實每個字型並非只有一個代表的 Unicode 對應碼，可以很多不同的編碼皆適用，只是都會有一個代表碼，而代表碼會是顯示第一個，例如這邊的例子 `(` 會是 `E19B`。
+First thing is why there are many unicode encoding? Acutually not only one unicode encoding map to one character in the font file, but each font have a main unicode encoding, like the sample `(` map to `E19B` encoding.
 
-另外兩個比較重要的訊息分別是 **Index** 與 **Contours data**：
+The other two important information is **Index** and **Contours data** :
 
-+ **Index** : 表示的是這個字型在字型表中的順序。
-+ **Contours data** : 表示的是該字型的輪廓，會由不同座標來描繪
++ **Index** : Means the order of the font list.
++ **Contours data** : Means the contours of the font and will represent by coordinates to draw.
 
-因為上述兩個參數，會隨著 CSS 反爬蟲的難度，而有不同的因素關鍵，幫助判別，後面的例子會提到，因此先記住便可。
+The above two arguments are the keypoint for assisting check the font if CSS anti-scraping difficulty increase, and we'll talk later.
+
 
 ### 3.2 Use fonttools of python package to read data 
 
