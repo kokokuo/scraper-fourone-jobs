@@ -65,18 +65,18 @@ And the attribute `url` could discover which font format was used, but only find
 
 But the file name looks like **automatically and randomly generated**,  the encoding of font content also could be different, so I have to download the file more times and check the HTML scraping source font of encoding again for checking the encoding is different or not.
 
-Then copy the font file URL path and download it for tring to analyze the content of font. After we know the rule,  we could build a scraper process to automatically download file and parse weird word, then map word to the encoding for translation to correct contents.
+Then copy the font file URL path and download it for tring to analyze the content of font. After we know the rule,  we could build a scraper process to automatically download file and parse garbled words, then map word to the encoding for translation to correct contents.
 
 
 <br/>
 
 ### 3. Download font file for analyzing
 
-下載了字型檔案後，要開始解析字型的格式，因為這些字型都都會紀錄了不同的文字，以及這些文字要顯示的編碼。
+After downloading the font files, then start to analyze the content of font, because the font record different character and the encoding for translating to show character.
 
-所以前面從 HTML 抓取的文字雖然是亂碼，但是這些亂碼的編碼丟到字型檔案中時，亂碼的編碼可以對應到字型文字的編碼，就像查表翻譯一樣轉成可以正常顯示的文字。
+Although the words are garbled when we parsed them from HTML, but if we put the garbled words into font file, then the font file will figure out these character of garbled words and map to translate correct character.
 
-這也是為何需要下載字型並先解析內容，透過程式來協助翻譯成正確的內容，因為爬蟲程式不是瀏覽器，所以要自己來做。
+This is reason why we need to download the font file first. But the problem is the scraping process not a browser, so we need to make more effort to analyze and parse it by ourself.
 
 ### 3.1 Analyze font content by FontCreator or FontDrop
 
