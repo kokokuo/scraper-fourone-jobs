@@ -132,9 +132,13 @@ font = TTFont(io.BytesIO(resp.content))
 font.saveXML("saved file path")
 ```
 
-保存 XML 格式檔案的原因，是因為 `TTFont` 會根據字型字體的規範來解析與讀取，並且不同的字體會有不同的規範格式，例如 **[WOFF - Web Open Font Format](https://zh.wikipedia.org/wiki/Web%E9%96%8B%E6%94%BE%E5%AD%97%E5%9E%8B%E6%A0%BC%E5%BC%8F#cite_note-10)** 、 **[TTF - TrueType](https://zh.wikipedia.org/wiki/TrueType)** 與 **[EOT - Embedded OpenType](https://zh.wikipedia.org/wiki/%E5%B5%8C%E5%85%A5%E5%BC%8FOpenType)** 內部定義資料的屬性與標籤皆會不同。
 
-因此雖然在前半段透過了 **FontCreator** 或 **FontDrop!** 讀取字型檔案並看見可視化的內容，但仍然需要了解字體內部的規範與定義，在使用 `fonttools` 提供的方法時，才能知道要呼叫的方法會對應什麼標籤、什麼資料值。所以當存成 XML 後便可以直接閱讀。
+The reason for saving to XML format file is that it's still hard to read the right data from `fonttools` even although we know the content of font by visualizing from **FontCreator** and **FontDrop!** tools before. 
+
+Because we could not know which methods could find the data we want. and that why we need to save to XML file format first and then call the right method by mapping to the content in the XML.
+
+Here, `TTFont` could analyze and parse content from font according to different font format. Each font format has different specification to to recording encoding font, like [WOFF - Web Open Font Format](https://zh.wikipedia.org/wiki/Web%E9%96%8B%E6%94%BE%E5%AD%97%E5%9E%8B%E6%A0%BC%E5%BC%8F#cite_note-10)**, **[TTF - TrueType](https://zh.wikipedia.org/wiki/TrueType)** and **[EOT - Embedded OpenType](https://zh.wikipedia.org/wiki/%E5%B5%8C%E5%85%A5%E5%BC%8FOpenType)** and record encoding and description of font with different tags and attributes.
+
 
 Okay, let's open the saved font file of XML format to analyze the contents.
 
