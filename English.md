@@ -145,23 +145,25 @@ Okay, let's open the saved font file of XML format to analyze the contents.
 
 #### (1.) `GlyphOrder` and `GlyphID` tags - Font indexing and unicode mapping
 
-**GlyphOrder** 與 **GlyphID** 標籤：會有序的紀錄該字型檔的所有字型。每個 **GlyphID** 標籤藉由 **索引 (Index)** 以及各自代表的 **Unicode** 編碼來代表字型。這也可以對照到前面的 **FontDrop!** 中的 **Index** 資訊，因此便可以透過該 **Index** 得知彼此在 **FontDrop!** 上所呈現的字型是什麼文字。
+**GlyphOrder** and **GlyphID** tags：These two tags could record the all different fonts orderly.
+Each tags of **GlyphID** describe the font through **Unicode** and **Index** attribute. The information is the same information as **Index** int the **FontDrop!**, so we could know every font meaning through the visualization in the **FontDrop!**.
 
-例如下圖中看一下索引為 `4` 的 Unicode 編碼為 `uniE19B`，而對照一開始的 **FontDrop!** 會是 `(` 。
+Here is a sample that shows the index `4` have a attribute Unicode is `uniE19B` and after we checking the **FontDrop!** website, we could know the meaning of font is `(`
 
-**<p align="center">字型 XML 格式 - GlyphOrder 與 GlyphID 標籤</p>**
+
+**<p align="center">XML Font format - GlyphOrder and GlyphID tags</p>**
 <p align="center">
   <img src="../master/Images/Anti-scraping-font-glyph-ids.png?raw=true" width="640px">
 </p>
 
-而在 Python 的 `fonttools` 中，可以透過呼叫 `getGlyphOrder` 方法來取得 `GlyphOrder` 標籤：
+Now, we could call the `getGlyphOrder` method to get the contents of `GlyphOrder` tags by using `fonttools` package :
 
 ```python
-# getGlyphOrder 會回傳陣列，該陣列會以 GlyphOrder 中的 GlyphID 索引為依序排列
+# The getGlyphOrder method will return array and the array will show the data orderly according to the index attribue of GlyphID tag in the GlyphOrder parent tag.
 orders: List[str] = font.getGlyphOrder()
 ```
 
-**<p align="center">getGlyphOrder 方法顯示</p>**
+**<p align="center">The data after calling the getGlyphOrder method</p>**
 <p align="center">
   <img src="../master/Images/python-font-getGlyphOrder.png?raw=true">
 </p>
