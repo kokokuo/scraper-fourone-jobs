@@ -171,7 +171,7 @@ orders: List[str] = font.getGlyphOrder()
 
 #### (2.) `TTGlyph` and `contour` tags - Font contours and coordinate 
 
-**TTGlyph** 與 **contour** 標籤： **TTGlyph** 會紀錄 **GlyphID** 文字代表的 Unicode 編碼在字型檔中的「輪廓資訊」，包含該字型的最小最大 X, Y 寬高，以及由標籤 **contour** 所組成的「輪廓描繪座標」。
+**TTGlyph** and **contour** tags： **TTGlyph** 會紀錄 **GlyphID** 文字代表的 Unicode 編碼在字型檔中的「輪廓資訊」，包含該字型的最小最大 X, Y 寬高，以及由標籤 **contour** 所組成的「輪廓描繪座標」。
 
 因為字型檔中的字型是透過輪廓描述並識別的，因此不會有任何標籤告知該字型是什麼「字」，而是只會紀錄該字的「輪廓」，只是透過軟體看得出是什麼文字而已。另外這些輪廓做標可以在 **FontDrop!** 中也能找到一樣的資訊。
 
@@ -192,7 +192,7 @@ orders: List[str] = font.getGlyphOrder()
 
 #### (3.) `cmap` and `map` tags  - Other unicode mapping
 
-**cmap** 與 **map** 標籤：這兩個標籤紀錄了字型中每個字的其他 Unicode 編碼，例如這邊的 `uniE0AF`， 首先 `code` 屬性會看到同樣是同樣數值的 `0xe0af` (其中的 `0x` 可以忽略)，而這個 `code` 屬性表示了其他可以匹配的 Unicode 編碼。
+**cmap** and **map** tags：這兩個標籤紀錄了字型中每個字的其他 Unicode 編碼，例如這邊的 `uniE0AF`， 首先 `code` 屬性會看到同樣是同樣數值的 `0xe0af` (其中的 `0x` 可以忽略)，而這個 `code` 屬性表示了其他可以匹配的 Unicode 編碼。
 
 **<p align="center">字型 XML 格式 - cmaps 與 cmap 標籤</p>**
 <p align="center">
