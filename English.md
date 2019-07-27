@@ -171,24 +171,23 @@ orders: List[str] = font.getGlyphOrder()
 
 #### (2.) `TTGlyph` and `contour` tags - Font contours and coordinate 
 
-**TTGlyph** and **contour** tags： **TTGlyph** 會紀錄 **GlyphID** 文字代表的 Unicode 編碼在字型檔中的「輪廓資訊」，包含該字型的最小最大 X, Y 寬高，以及由標籤 **contour** 所組成的「輪廓描繪座標」。
+**TTGlyph** and **contour** tags： **TTGlyph** could record the contour information which mapping to unicode encoding in the **GlyphID**. The information about  contour include the minimum and maximun width of X coordniate, height of Y coordniate width and contour coordinate in **contour** tag.
 
-因為字型檔中的字型是透過輪廓描述並識別的，因此不會有任何標籤告知該字型是什麼「字」，而是只會紀錄該字的「輪廓」，只是透過軟體看得出是什麼文字而已。另外這些輪廓做標可以在 **FontDrop!** 中也能找到一樣的資訊。
+Because the fonts in the font file are described and identified by the contour, there won't be any tags telling the word what the word is. It only record the 「Contour」of the word, but we could understand what the text is by using software like **FontDrop!**, **[FontCreator]** ..so on and we could also find the contour coordinate in these software.
 
-例如上述的索引 `GlyphID` 標籤索引為 `4`，該 Unicode 為 `uniE19B`，透過 Unicode 為 `uniE19B `找到的輪廓數值與 **FontDrop!** 中的 `(` 會是一模一樣的輪廓座標。
+for example, the previous information shows the tag index of `GlyphID` is `4` and the Unicode is `uniE19B` , so we could find the contour information by encoding number `uniE19B`. Here you could see the contour coordinate is the same as the font `(` in the **FontDrop!**.
 
-**<p align="center">字型 XML 格式 - TTGlyph 與 contour 標籤</p>**
+**<p align="center">XML Font format - TTGlyph and contour tags</p>**
 <p align="center">
   <img src="../master/Images/Anit-scraping-glyph-contours.png?raw=true" width="640px">
 </p>
 
-在 `fonttools` 中，可以透過 `get` 方法帶入 `glyf` 標籤值直接取出所有的 `TTGlyph` 標籤並尋找要的輪廓值，如下：
+In `fonttools` library, we could get all `TTGlyph` tags and find the contour information through call `get` method and set the `glyf` tag value :
 
-**<p align="center">字型 XML 格式 - TTGlyph 與 contour 標籤</p>**
+**<p align="center">XML Font format - How to get the information of TTGlyph and contour tags</p>**
 <p align="center">
   <img src="../master/Images/python-get-glyph-coordinates.png?raw=true">
 </p>
-
 
 #### (3.) `cmap` and `map` tags  - Other unicode mapping
 
