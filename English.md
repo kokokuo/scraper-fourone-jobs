@@ -191,7 +191,8 @@ In `fonttools` library, we could get all `TTGlyph` tags and find the contour inf
 
 #### (3.) `cmap` and `map` tags  - Other unicode mapping
 
-**cmap** and **map** tags：這兩個標籤紀錄了字型中每個字的其他 Unicode 編碼，例如這邊的 `uniE0AF`， 首先 `code` 屬性會看到同樣是同樣數值的 `0xe0af` (其中的 `0x` 可以忽略)，而這個 `code` 屬性表示了其他可以匹配的 Unicode 編碼。
+**cmap** and **map** tags：
+These two tags record the other Unicode encoding of each word in the font, for example 例如這邊的 `uniE0AF`， 首先 `code` 屬性會看到同樣是同樣數值的 `0xe0af` (其中的 `0x` 可以忽略)，而這個 `code` 屬性表示了其他可以匹配的 Unicode 編碼。
 
 **<p align="center">字型 XML 格式 - cmaps 與 cmap 標籤</p>**
 <p align="center">
